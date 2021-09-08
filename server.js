@@ -32,11 +32,28 @@ app.get('api/notes', (req, res) => {
 });
 
 app.post('api/notes', (req, res) =>{
-    
+    let apiRoutes = req.body;
+    fs.readFile(path.join(__dirname, './db/db.json'), (err, data) => {
+    const newNote = JSON.parse(data);
+    const notesCont = [...newNote, notesCont];
+    JSON.stringify(notesCont);
+    res.json(notesCont);
+    fs.writeFile(path.join(__dirname, './db/db.json'). JSON.stringify(notesCont), (err,data) =>{
+
+    })
+    })
 });
 
 app.delete('/api/notes/:id', (req, res) => {
-
+    const id = req.params;
+    const notes;
+    notes.map((element, index) => {
+        if (element.id == id) {
+            notes= element
+            notes.parse(index, 1)
+            return res.json(notes);
+        }
+    })
 });
 
 app.listen(PORT, () => {
